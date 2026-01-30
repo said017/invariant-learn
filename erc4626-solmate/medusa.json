@@ -1,0 +1,75 @@
+{
+    "fuzzing": {
+        "workers": 4,
+        "workerResetLimit": 50,
+        "timeout": 0,
+        "testLimit": 50000,
+        "callSequenceLength": 100,
+        "deployerAddress": "0x30000",
+        "senderAddresses": [
+            "0x10000",
+            "0x20000",
+            "0x30000"
+        ],
+        "targetContracts": ["Medusa_SimpleERC4626"],
+        "targetContractsBalances": [],
+        "constructorArgs": {},
+        "corpusDirectory": "test/medusa/corpus",
+        "coverageEnabled": true,
+        "testAllContracts": false,
+        "testing": {
+            "stopOnFailedTest": true,
+            "stopOnFailedContractMatching": false,
+            "stopOnNoTests": true,
+            "testViewMethods": true,
+            "propertyTesting": {
+                "enabled": true,
+                "testPrefixes": ["fuzz_"]
+            },
+            "assertionTesting": {
+                "enabled": false,
+                "testViewMethods": false,
+                "assertionModes": {
+                    "failOnCompilerInsertedPanic": false,
+                    "failOnAssertion": true,
+                    "failOnRevert": false
+                },
+                "panicCodeConfig": {
+                    "failOnCompilerInsertedPanic": false,
+                    "failOnArithmeticUnderflow": false,
+                    "failOnDivideByZero": false,
+                    "failOnEnumCastOutOfBounds": false,
+                    "failOnIncorrectStorageAccess": false,
+                    "failOnPopEmptyArray": false,
+                    "failOnOutOfBoundsAccess": false,
+                    "failOnAllocateTooMuchMemory": false,
+                    "failOnCallUninitializedVariable": false
+                }
+            },
+            "optimizationTesting": {
+                "enabled": false,
+                "testPrefixes": ["optimize_"]
+            }
+        },
+        "chainConfig": {
+            "codeSizeCheckDisabled": true,
+            "cheatCodes": {
+                "cheatCodesEnabled": true,
+                "enableFFI": false
+            }
+        }
+    },
+    "compilation": {
+        "platform": "crytic-compile",
+        "platformConfig": {
+            "target": "./test/medusa/Medusa_SimpleERC4626.sol",
+            "solcVersion": "",
+            "exportDirectory": "",
+            "args": ["--solc-remaps", "solmate/=lib/solmate/src/,forge-std/=lib/forge-std/src/,ds-test/=lib/solmate/lib/ds-test/src/"]
+        }
+    },
+    "logging": {
+        "level": "info",
+        "logDirectory": ""
+    }
+}

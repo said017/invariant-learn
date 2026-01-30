@@ -1,0 +1,5 @@
+testMode: "property"
+testLimit: 150000
+seqLen: 100
+corpusDir: "corpus"
+cryticArgs: ["--solc-remaps", "solmate/=lib/solmate/src/,forge-std/=lib/forge-std/src/,ds-test/=lib/solmate/lib/ds-test/src/"]

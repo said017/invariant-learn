@@ -1,0 +1,3 @@
+ds-test/=/Users/said/audits/2026/invariant-learn/erc4626-solmate/lib/solmate/lib/ds-test/src/
+forge-std/=/Users/said/audits/2026/invariant-learn/erc4626-solmate/lib/forge-std/src/
+solmate/=/Users/said/audits/2026/invariant-learn/erc4626-solmate/lib/solmate/src/
