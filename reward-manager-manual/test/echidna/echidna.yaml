@@ -1,0 +1,5 @@
+testMode: "property"
+testLimit: 150000
+seqLen: 100
+corpusDir: "corpus"
+cryticArgs: ["--solc-remaps", "@openzeppelin/=lib/openzeppelin-contracts/contracts/,forge-std/=lib/forge-std/src/,erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/,halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/"]

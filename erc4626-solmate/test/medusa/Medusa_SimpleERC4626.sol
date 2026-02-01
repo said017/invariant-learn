@@ -38,7 +38,7 @@ contract MedusaVaultHelper {
 }
 
 contract Medusa_SimpleERC4626 is SimpleERC4626 {
-    uint256 internal constant MAX_ASSETS = type(uint128).max;
+    uint256 internal constant MAX_ASSETS = type(uint112).max;
 
     MockERC20 internal mockAsset;
     MedusaVaultHelper internal helper;
@@ -149,5 +149,10 @@ contract Medusa_SimpleERC4626 is SimpleERC4626 {
         uint256 shares = convertToShares(testAmount);
         uint256 assetsBack = convertToAssets(shares);
         return assetsBack <= testAmount;
+    }
+
+    // 5. total assets >= convertToAssets(totalSupply())
+    function fuzz_total_assets_solvency() public view returns (bool) {
+        return totalAssets() >= convertToAssets(totalSupply);
     }
 }

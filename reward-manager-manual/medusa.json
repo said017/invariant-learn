@@ -1,0 +1,75 @@
+{
+    "fuzzing": {
+        "workers": 4,
+        "workerResetLimit": 50,
+        "timeout": 0,
+        "testLimit": 150000,
+        "callSequenceLength": 100,
+        "deployerAddress": "0x30000",
+        "senderAddresses": [
+            "0x10000",
+            "0x20000",
+            "0x30000"
+        ],
+        "targetContracts": ["Medusa_RewardManager"],
+        "targetContractsBalances": [],
+        "constructorArgs": {},
+        "corpusDirectory": "test/medusa/corpus",
+        "coverageEnabled": true,
+        "testAllContracts": false,
+        "testing": {
+            "stopOnFailedTest": true,
+            "stopOnFailedContractMatching": false,
+            "stopOnNoTests": true,
+            "testViewMethods": true,
+            "propertyTesting": {
+                "enabled": true,
+                "testPrefixes": ["fuzz_"]
+            },
+            "assertionTesting": {
+                "enabled": false,
+                "testViewMethods": false,
+                "assertionModes": {
+                    "failOnCompilerInsertedPanic": false,
+                    "failOnAssertion": true,
+                    "failOnRevert": false
+                },
+                "panicCodeConfig": {
+                    "failOnCompilerInsertedPanic": false,
+                    "failOnArithmeticUnderflow": false,
+                    "failOnDivideByZero": false,
+                    "failOnEnumCastOutOfBounds": false,
+                    "failOnIncorrectStorageAccess": false,
+                    "failOnPopEmptyArray": false,
+                    "failOnOutOfBoundsAccess": false,
+                    "failOnAllocateTooMuchMemory": false,
+                    "failOnCallUninitializedVariable": false
+                }
+            },
+            "optimizationTesting": {
+                "enabled": false,
+                "testPrefixes": ["optimize_"]
+            }
+        },
+        "chainConfig": {
+            "codeSizeCheckDisabled": true,
+            "cheatCodes": {
+                "cheatCodesEnabled": true,
+                "enableFFI": false
+            }
+        }
+    },
+    "compilation": {
+        "platform": "crytic-compile",
+        "platformConfig": {
+            "target": "./test/medusa/Medusa_RewardManager.sol",
+            "solcVersion": "",
+            "exportDirectory": "",
+            "args": ["--solc-remaps", "@openzeppelin/=lib/openzeppelin-contracts/contracts/,forge-std/=lib/forge-std/src/,erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/,halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/"]
+        }
+    },
+    "logging": {
+        "level": "info",
+        "logDirectory": ""
+    }
+}

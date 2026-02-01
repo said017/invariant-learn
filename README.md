@@ -52,3 +52,61 @@ medusa fuzz
 ```
 
 Medusa reads `medusa.json` from the project root automatically.
+
+---
+
+### RewardManager
+
+`reward-manager-manual/src/RewardManager.sol` 
+
+### Fuzz Test Suites
+
+| File | Fuzzer | Contract |
+|------|--------|----------|
+| `test/echidna/Echidna_RewardManager.sol` | Echidna | `Echidna_RewardManager` |
+| `test/medusa/Medusa_RewardManager.sol` | Medusa | `Medusa_RewardManager` |
+
+The test contract acts as the "vault" (`msg.sender` for `notifyTransfer`). It uses a fixed set of 3 user addresses and clamps fuzzed inputs to valid ranges.
+
+**Handler functions:**
+- `handler_deposit` / `handler_withdraw` / `handler_transfer` — simulate vault balance changes via `notifyTransfer`
+- `handler_addReward` — mints reward tokens and adds them for the current epoch
+- `handler_accrueVault` / `handler_accrueUser` / `handler_accrueAll` — trigger point accrual
+- `handler_claimRewardReference` / `handler_claimReward` — claim rewards on past epochs
+
+### Properties / Invariants Tested
+
+| # | Property | Description |
+|---|----------|-------------|
+| 1 | **Rewards match added** | On-chain `rewards[epoch][vault][token]` equals the tracked total added via `addReward`. |
+| 2 | **Shares sum <= total supply** | Sum of all tracked user shares <= `totalSupply` for the current epoch. Accounts for lazy evaluation. |
+| 3 | **Points sum <= total points** | Sum of all tracked user points <= `totalPoints` for the current epoch. |
+| 4 | **Epoch always >= 1** | `currentEpoch()` is always at least 1. |
+
+### How to Run
+
+```bash
+cd reward-manager-manual
+```
+
+#### Build
+
+```bash
+forge build
+```
+
+#### Echidna
+
+```bash
+echidna ./test/echidna/Echidna_RewardManager.sol \
+  --contract Echidna_RewardManager \
+  --config test/echidna/echidna.yaml
+```
+
+#### Medusa
+
+```bash
+medusa fuzz
+```
+
+Medusa reads `medusa.json` from the project root automatically.

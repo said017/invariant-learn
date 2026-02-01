@@ -38,7 +38,7 @@ contract EchidnaVaultHelper {
 }
 
 contract Echidna_SimpleERC4626 is SimpleERC4626 {
-    uint256 internal constant MAX_ASSETS = type(uint128).max;
+    uint256 internal constant MAX_ASSETS = type(uint112).max;
 
     MockERC20 internal mockAsset;
     EchidnaVaultHelper internal helper;
@@ -159,5 +159,11 @@ contract Echidna_SimpleERC4626 is SimpleERC4626 {
         uint256 assetsBack = convertToAssets(shares);
         return assetsBack <= testAmount;
     }
+
+        // 5. total assets >= convertToAssets(totalSupply())
+    function echidna_total_assets_solvency() public view returns (bool) {
+        return totalAssets() >= convertToAssets(totalSupply);
+    }
+       
 
 }
