@@ -110,3 +110,7 @@ medusa fuzz
 ```
 
 Medusa reads `medusa.json` from the project root automatically.
+
+## Week 2 — Morpho Blue with Recon
+
+89% coverage is reached with Irm and Oracle mocks, limiting market setup and clamping the inputs.
